@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ... (your existing head content) ... -->
+</head>
+
+<body class="sub_page">
+  <!-- ... (your existing body content) ... -->
+
+  <!-- contact section -->
+  <section class="contact_section layout_padding">
+    <div class="container">
+      <!-- ... (your existing container and heading code) ... -->
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <form id="contactForm" action="/submit" method="post">
+              <div class="text-center mb-3">
+                <input type="text" class="form-control" placeholder="Name" name="name" />
+              </div>
+              <div class="text-center mb-3">
+                <input type="email" class="form-control" placeholder="Email" name="email" />
+              </div>
+              <div class="text-center mb-3">
+                <input type="text" class="form-control" placeholder="Phone Number" name="phone" />
+              </div>
+              <div class="text-center mb-3">
+                <input type="text" class="form-control message-box" placeholder="Message" name="message" />
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-primary" onclick="submitContactForm()">
+                  SEND
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ... (your existing content) ... -->
+
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+
+  <!-- Your JavaScript code -->
+  <script>
+    function submitContactForm() {
+      // Get form data
+      var formData = {
+        name: document.getElementById('contactForm').elements['name'].value,
+        email: document.getElementById('contactForm').elements['email'].value,
+        phone: document.getElementById('contactForm').elements['phone'].value,
+        message: document.getElementById('contactForm').elements['message'].value
+      };
+
+      // Perform validation if needed
+
+      // Send data to server using fetch
+      fetch('http://127.0.0.1:5000/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Handle response if needed
+          console.log('Server response:', data);
+        })
+        .catch(error => {
+          // Handle error if needed
+          console.error('Error:', error);
+        });
+    }
+  </script>
+</body>
+
+</html>
